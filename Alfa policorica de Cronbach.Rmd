@@ -1,0 +1,95 @@
+---
+title: "Alfa de Cronbach Policorica"
+output: html_Alfa de Cronbach Policorica
+---
+
+
+Para correr una linea, utilizar *Ctrl+Shift+Enter*
+
+Para insertar una nueva linea de codigo, utilizar *Ctrl+Alt+I*
+
+```{r}
+##Iniciar función paquetes
+ipak <- function(pkg){
+  new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+  if (length(new.pkg)) 
+    install.packages(new.pkg, dependencies = TRUE)
+  sapply(pkg, require, character.only = TRUE)
+}
+```
+
+
+```{r}
+##Asignar paquetes
+packages <- c("parameters","apa","haven","ggplot2","ggpubr","gridExtra","apaTables", "reshape", "GPArotation", "mvtnorm", "psych", "psychometric", "lavaan", "nFactors", "semPlot", "lavaan", "MVN", "semTools")
+
+```
+
+
+```{r}
+##Abrir paquetes
+ipak(packages)
+```
+
+
+```{r}
+##Abrir archivo de trabajo
+Estructura11
+```
+
+
+```{r}
+##Limpiar base de datos
+DatosL <- na.omit(Estructura11)
+```
+
+
+```{r}
+##Abrir base limpia
+DatosL
+```
+
+
+```{r}
+### Crea una subdata de cada factor
+subdatos_Factor1 <- data.frame(cbind(DatosL$Q17_2, DatosL$Q17_3, DatosL$Q17_4, DatosL$Q17_1, DatosL$Q17_9, DatosL$Q17_7))
+
+```
+
+
+```{r}
+### Genera una matriz poligorica, utilizada cuando se tienen variables ordinales
+Poly_Factor1 <- polychoric(subdatos_Factor1)
+```
+
+
+```{r}
+### Obten el Alfa ordinal
+psych::alpha(Poly_Factor1$rho) ##escribirlo en la consola, sino no saldrá
+```
+
+```{r}
+### Informa los descriptivos
+describe(subdatos_Factor1)
+```
+
+
+```{r}
+#Guardar la syntaxis del trabajo
+
+```
+
+
+Guardar la syntaxis del trabajo
+Utilizar *Ctrl+Shift+K* sobre un Chunk (linea de trabajo)
+
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
